@@ -50,7 +50,11 @@ main() {
 
   set -x
   # Runs the command to generate the weights
-  . "$(dirname "${BASH_SOURCE[0]}")/bench-bot-run.sh" "$@"
+  if [ $# -ge 3 ]; then
+    . "$(dirname "${BASH_SOURCE[0]}")/bench-bot-run.sh" "$@"
+  else
+    . "./scripts/run_benches_for_runtime.sh" "$@"
+  fi
   set +x
 
   # in case we used diener to patch some dependency during benchmark execution,
